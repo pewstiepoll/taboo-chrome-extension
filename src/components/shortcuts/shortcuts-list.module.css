@@ -1,0 +1,15 @@
+@import "./shortcuts.variables.css";
+
+.container {
+  width: calc(var(--width) * 4);
+  overflow-x: auto;
+  height: 100vh;
+}
+
+.shortcuts-category-title {
+  text-align: left;
+  font-size: 1em;
+  font-weight: 300;
+
+  text-align: center;
+}

@@ -1,30 +1,11 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+}
+
 .App {
-  font-family: sans-serif;
-  text-align: center;
-}
-
-:root {
-  --table-border: 1px solid #ddd;
-}
-
-.form-group {
-  display: flex;
-}
-
-table {
-  background-color: #eee;
-  border: var(--table-border);
-  width: 350px;
-
-  overflow: hidden;
-}
-
-td:not(:last-child) {
-  border-right: var(--table-border);
-}
-
-td {
-  overflow: hidden;
-  word-wrap: none;
-  text-overflow: ellipsis;
+  font-family: -apple-system, system-ui, Roboto, sans-serif;
 }

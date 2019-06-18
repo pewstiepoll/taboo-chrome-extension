@@ -18,6 +18,10 @@
   background-color: rgba(32, 33, 36, 0.06);
 }
 
+.shortcut.--shaped {
+  color: rgba(0, 0, 0, 0.7);
+}
+
 .shortcut-icon {
   height: 50px;
   width: 50px;
@@ -34,6 +38,11 @@
 
   font-weight: 500;
   font-size: 1.5em;
+}
+
+.shortcut.--shaped .shortcut-icon {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+  background-color: rgba(32, 33, 36, 0.05);
 }
 
 .shortcut-title-container {

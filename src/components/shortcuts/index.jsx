@@ -32,6 +32,7 @@ export default function Shortcuts() {
         <Shortcut title="Google" link="https://google.com" />
         <Shortcut title="Netflix" link="https://netflix.com" />
         <Shortcut title="Youtube" link="https://youtube.com" />
+        <Shortcut title="Add shortcut" icon="+" isShape={true} />
       </div>
       <h3 className={styles["shortcuts-category-title"]}>Learning</h3>
       <div className="shortcuts">
@@ -40,6 +41,7 @@ export default function Shortcuts() {
         <Shortcut title="Coursera" link="https://coursera.com" />
         <Shortcut title="Udemy" link="https://udemy.com" />
         <Shortcut title="Udacity" link="https://udacity.com" />
+        <Shortcut title="Add shortcut" icon="+" isShape={true} />
       </div>
     </div>
   );

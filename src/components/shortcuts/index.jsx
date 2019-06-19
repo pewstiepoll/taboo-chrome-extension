@@ -1,12 +1,3 @@
-import React from "react";
-import Shortcut from "./shortcut";
-// import useShortcuts from "./useShortcuts";
-// import uuidV4 from "uuid/v4";
-// import Shortcut from "../../classes/Shortcut";
-// import ShortcutCategory from "../../classes/ShortcutCategory";
-
-import styles from "./shortcuts-list.module.css";
-
 /**
  * The structure of the store for Shortcuts is the following:
  * Shortcuts: {
@@ -24,25 +15,90 @@ import styles from "./shortcuts-list.module.css";
  *    - removeShortcut({id, title, link}) - removes the shortcut by its link, title or id
  *    - updateShortcut({id, title, link}, {title, link, category_id}) - updates title/link/category_id of the shortcut by its id, title or link
  */
+
+import React from "react";
+import Shortcut from "./shortcut";
+// import useShortcuts from "./useShortcuts";
+import uuidV4 from "uuid/v4";
+import ShortcutClass from "../../classes/Shortcut";
+import CategoryClass from "../../classes/ShortcutCategory";
+
+import styles from "./shortcuts-list.module.css";
+
+function ShortcutCategory({ category, shortcuts }) {
+  return (
+    <>
+      <h3 className={styles["shortcuts-category-title"]}>{category.title}</h3>
+      <div className="shortcuts">
+        {shortcuts.map(({ id, title, link }) => (
+          <Shortcut key={id} title={title} link={link} />
+        ))}
+        <Shortcut title="Add shortcut" icon="+" isShape={true} />
+      </div>
+    </>
+  );
+}
+
+function getMock(categoryTitle) {
+  const category = CategoryClass.factory(uuidV4(), categoryTitle);
+  const items = [
+    ShortcutClass.factory({
+      id: uuidV4(),
+      category_id: category.id,
+      title: "Google",
+      link: "google.com"
+    }),
+    ShortcutClass.factory({
+      id: uuidV4(),
+      category_id: category.id,
+      title: "Yahoo",
+      link: "yahoo.com"
+    }),
+    ShortcutClass.factory({
+      id: uuidV4(),
+      category_id: category.id,
+      title: "Bing",
+      link: "Bing.com"
+    }),
+    ShortcutClass.factory({
+      id: uuidV4(),
+      category_id: category.id,
+      title: "Youtube",
+      link: "youtube.com"
+    }),
+    ShortcutClass.factory({
+      id: uuidV4(),
+      category_id: category.id,
+      title: "Tumblr",
+      link: "tumblr.com"
+    })
+  ];
+
+  return [category, items];
+}
+
+function AddCategoryButton() {
+  const classes = [
+    styles["shortcuts-category-title"],
+    styles["shortcuts-category-title--grayed"]
+  ].join(" ");
+
+  return <button className={classes}>Add category...</button>;
+}
+
 export default function Shortcuts() {
   return (
     <div className={styles.container}>
-      <h3 className={styles["shortcuts-category-title"]}>Entertainment</h3>
-      <div className="shortcuts">
-        <Shortcut title="Google" link="https://google.com" />
-        <Shortcut title="Netflix" link="https://netflix.com" />
-        <Shortcut title="Youtube" link="https://youtube.com" />
-        <Shortcut title="Add shortcut" icon="+" isShape={true} />
-      </div>
-      <h3 className={styles["shortcuts-category-title"]}>Learning</h3>
-      <div className="shortcuts">
-        <Shortcut title="Egghead.io" link="https://egghead.io" />
-        <Shortcut title="Frontend Masters" link="https://frontendmasters.com" />
-        <Shortcut title="Coursera" link="https://coursera.com" />
-        <Shortcut title="Udemy" link="https://udemy.com" />
-        <Shortcut title="Udacity" link="https://udacity.com" />
-        <Shortcut title="Add shortcut" icon="+" isShape={true} />
-      </div>
+      {[getMock("Entertainment"), getMock("Learning")].map(
+        ([category, shortcuts], id) => (
+          <ShortcutCategory
+            key={id}
+            category={category}
+            shortcuts={shortcuts}
+          />
+        )
+      )}
+      <AddCategoryButton />
     </div>
   );
 }

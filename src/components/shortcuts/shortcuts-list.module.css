@@ -1,17 +1,25 @@
 @import "./shortcuts.variables.css";
 
 .container {
-  width: calc(var(--width) * 4);
+  width: 450px;
   overflow-x: auto;
   height: 100vh;
 }
 
 .shortcuts-category-title {
-  text-align: left;
+  margin: 15px auto;
+  outline: none;
+  border: none;
+  display: block;
+
   font-size: 1em;
   font-weight: 300;
 
   text-align: center;
 
   cursor: pointer;
+}
+
+.shortcuts-category-title--grayed {
+  color: rgba(0, 0, 0, 0.5);
 }

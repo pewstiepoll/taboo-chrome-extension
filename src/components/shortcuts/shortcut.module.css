@@ -19,6 +19,10 @@
 }
 
 .shortcut.--shaped {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.shortcut.--shaped:hover {
   color: rgba(0, 0, 0, 0.7);
 }
 
@@ -41,8 +45,10 @@
 }
 
 .shortcut.--shaped .shortcut-icon {
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-  background-color: rgba(32, 33, 36, 0.05);
+  box-shadow: none;
+  background: none;
+
+  border: 2px dashed rgba(32, 33, 36, 0.09);
 }
 
 .shortcut-title-container {

@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+export const MODAL_HTML_ELEMENT_ID = "modal";
+
 export function useModal() {
   const [isOpen, setIsOpen] = React.useState(false);
 
@@ -17,13 +19,9 @@ export function Modal({ children, isOpen }) {
 
   return ReactDOM.createPortal(
     <>{children}</>,
-    document.getElementById("modal")
+    document.getElementById(MODAL_HTML_ELEMENT_ID)
   );
 }
-
-export const SimpleModal = withModal(function SimpleModal(props) {
-  return <Modal {...props}>I'm am a simple modal</Modal>;
-});
 
 export const ModalContext = React.createContext({});
 

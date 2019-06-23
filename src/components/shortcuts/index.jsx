@@ -22,6 +22,7 @@ import Shortcut from "./shortcut";
 import uuidV4 from "uuid/v4";
 import ShortcutClass from "../../classes/Shortcut";
 import CategoryClass from "../../classes/ShortcutCategory";
+import { withModal } from "../modal";
 
 import styles from "./shortcuts-list.module.css";
 
@@ -77,14 +78,23 @@ function getMock(categoryTitle) {
   return [category, items];
 }
 
-function AddCategoryButton() {
+const AddCategoryButton = withModal(function AddCategoryButton({ openModal }) {
   const classes = [
     styles["shortcuts-category-title"],
     styles["shortcuts-category-title--grayed"]
   ].join(" ");
 
-  return <button className={classes}>Add category...</button>;
-}
+  return (
+    <button
+      className={classes}
+      onClick={() => {
+        openModal();
+      }}
+    >
+      Add category...
+    </button>
+  );
+});
 
 export default function Shortcuts() {
   return (

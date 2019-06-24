@@ -70,7 +70,9 @@ const BaseModal = withModal(function BaseModal({ modal, closeModal }) {
           >
             <Fields />
             <Button type="submit">Add</Button>
-            <Button onClick={closeModal}>Cancel</Button>
+            <Button styleType="danger" type="button" onClick={closeModal}>
+              Cancel
+            </Button>
           </form>
         </div>
       </div>

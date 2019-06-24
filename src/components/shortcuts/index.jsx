@@ -88,7 +88,11 @@ const AddCategoryButton = withModal(function AddCategoryButton({ openModal }) {
     <button
       className={classes}
       onClick={() => {
-        openModal();
+        const modalParams = {
+          title: "Custom title"
+        };
+
+        openModal(modalParams);
       }}
     >
       Add category...

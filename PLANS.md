@@ -2,6 +2,10 @@
 
 ### v1.0
 
+**Modal**
+
+- [ ] Customizable modal with Inputs
+
 **Shortcuts**
 
 - [ ] Add shortcut by specifying its name and title

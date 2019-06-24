@@ -18,7 +18,7 @@
 
 import React from "react";
 import Shortcut from "./shortcut";
-// import useShortcuts from "./useShortcuts";
+import useShortcuts from "./useShortcuts";
 import uuidV4 from "uuid/v4";
 import ShortcutClass from "../../classes/Shortcut";
 import CategoryClass from "../../classes/ShortcutCategory";
@@ -78,7 +78,7 @@ function getMock(categoryTitle) {
   return [category, items];
 }
 
-const addCategoryModalParams = {
+const modalStaticParams = {
   title: "Add category",
   fields: [
     {
@@ -87,13 +87,13 @@ const addCategoryModalParams = {
       type: "text",
       label: "Category name"
     }
-  ],
-  onSubmit: results => {
-    console.log(results);
-  }
+  ]
 };
 
-const AddCategoryButton = withModal(function AddCategoryButton({ openModal }) {
+const AddCategoryButton = withModal(function AddCategoryButton({
+  openModal,
+  addCategory
+}) {
   const classes = [
     styles["shortcuts-category-title"],
     styles["shortcuts-category-title--grayed"]
@@ -103,7 +103,18 @@ const AddCategoryButton = withModal(function AddCategoryButton({ openModal }) {
     <button
       className={classes}
       onClick={() => {
-        openModal(addCategoryModalParams);
+        openModal({
+          ...modalStaticParams,
+          onSubmit: results => {
+            const { category_name } = results;
+
+            if (!category_name) return;
+
+            const newCategory = CategoryClass.factory(uuidV4(), category_name);
+
+            addCategory(newCategory);
+          }
+        });
       }}
     >
       Add category...
@@ -111,19 +122,22 @@ const AddCategoryButton = withModal(function AddCategoryButton({ openModal }) {
   );
 });
 
-export default function Shortcuts() {
+export default React.memo(function Shortcuts() {
+  const { shortcuts, categories, actions } = useShortcuts();
+  const { addCategory } = actions;
+
   return (
     <div className={styles.container}>
-      {[getMock("Entertainment"), getMock("Learning")].map(
-        ([category, shortcuts], id) => (
-          <ShortcutCategory
-            key={id}
-            category={category}
-            shortcuts={shortcuts}
-          />
-        )
-      )}
-      <AddCategoryButton />
+      {categories.map(category => (
+        <ShortcutCategory
+          key={category.id}
+          category={category}
+          shortcuts={shortcuts.filter(
+            shortcut => (shortcut.category_id = category.id)
+          )}
+        />
+      ))}
+      <AddCategoryButton addCategory={addCategory} />
     </div>
   );
-}
+});

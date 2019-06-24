@@ -2,8 +2,22 @@
   padding: 10px 15px;
   outline: none;
 
+  width: 70px;
+
   cursor: pointer;
   border: none;
+}
+
+.button--short {
+  width: 50px;
+}
+
+.button--standard {
+  width: 70px;
+}
+
+.button--long {
+  width: 100px;
 }
 
 .button--primary {

@@ -16,7 +16,34 @@
 }
 
 .modal-container {
-  width: 500px;
-  height: 100px;
+  width: 400px;
+  height: 200px;
   background: #fefefe;
+
+  padding: 10px 20px;
+}
+
+.modal-title {
+  font-size: 1.3em;
+  font-weight: lighter;
+}
+
+.modal-form {
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-label {
+  font-size: 0.8em;
+  font-weight: 500;
+
+  margin: 5px 0;
+}
+
+.field-input {
+  padding: 10px;
+  outline: none;
 }

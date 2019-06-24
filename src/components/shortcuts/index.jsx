@@ -78,6 +78,21 @@ function getMock(categoryTitle) {
   return [category, items];
 }
 
+const addCategoryModalParams = {
+  title: "Add category",
+  fields: [
+    {
+      name: "category_name",
+      placeholder: "Category name...",
+      type: "text",
+      label: "Category name"
+    }
+  ],
+  onSubmit: results => {
+    console.log(results);
+  }
+};
+
 const AddCategoryButton = withModal(function AddCategoryButton({ openModal }) {
   const classes = [
     styles["shortcuts-category-title"],
@@ -88,11 +103,7 @@ const AddCategoryButton = withModal(function AddCategoryButton({ openModal }) {
     <button
       className={classes}
       onClick={() => {
-        const modalParams = {
-          title: "Custom title"
-        };
-
-        openModal(modalParams);
+        openModal(addCategoryModalParams);
       }}
     >
       Add category...

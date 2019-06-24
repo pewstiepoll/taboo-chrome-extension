@@ -69,10 +69,12 @@ const BaseModal = withModal(function BaseModal({ modal, closeModal }) {
             className={styles["modal-form"]}
           >
             <Fields />
-            <Button type="submit">Add</Button>
-            <Button styleType="danger" type="button" onClick={closeModal}>
-              Cancel
-            </Button>
+            <div className={styles["modal-footer"]}>
+              <Button type="submit">Add</Button>
+              <Button styleType="danger" type="button" onClick={closeModal}>
+                Cancel
+              </Button>
+            </div>
           </form>
         </div>
       </div>

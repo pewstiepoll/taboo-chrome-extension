@@ -4,10 +4,11 @@
 
 **Modal**
 
-- [ ] Customizable modal with Inputs
+- [x] Customizable modal with dynamic inputs
 
 **Shortcuts**
 
+- [x] Create a new shortcut category by specifying its name
 - [ ] Add shortcut by specifying its name and title
 - [ ] Shortcut icon is the first letter of the title
 - [ ] Shortcut icon background is a fixed color

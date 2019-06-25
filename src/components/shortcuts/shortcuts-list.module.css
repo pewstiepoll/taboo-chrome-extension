@@ -20,6 +20,10 @@
   cursor: pointer;
 }
 
+.shortcuts-category-title:hover {
+  text-decoration: underline;
+}
+
 .shortcuts-category-title--grayed {
   color: rgba(0, 0, 0, 0.5);
 }

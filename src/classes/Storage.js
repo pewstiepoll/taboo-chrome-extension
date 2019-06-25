@@ -2,7 +2,7 @@
  * @class Storage
  * Base method to use storage
  */
-export default class Storage {
+export class Storage {
   /**
    * @static @method isConnected
    * @param {*} storage - storage object
@@ -13,6 +13,10 @@ export default class Storage {
   }
 
   constructor(field, strategy) {
+    if (!Boolean(field) || !Boolean(strategy))
+      throw new Error(
+        "Cannot create a storage object: all params should be specified"
+      );
     this.strategy = strategy;
 
     // Initialize the strategy first
@@ -22,60 +26,65 @@ export default class Storage {
     this.connect(field);
   }
 
-  connect(field) {
+  connect(fieldName) {
     // set up the field
-    this.field = this.strategy.getField(field);
+    this.field = this.strategy.getField(fieldName);
+
+    if (this.field) {
+      this.fieldName = fieldName;
+    }
   }
 
   save() {
-    this.strategy.setField(this.field);
+    this.strategy.setField(this.fieldName, this.field);
   }
 
   addProperty(title, value) {
-    if (this.field.hasOwnProperty(title))
-      throw new Error(
-        `Cannot create the new property: Property with title ${title} exists in storage. Update it instead.`
-      );
+    if (this.field.hasOwnProperty(title)) return false;
 
     // Add field
     this.field[title] = value;
 
     // Update the storage
     this.save();
+
+    return true;
   }
 
   removeProperty(title) {
-    if (!this.field.hasOwnProperty(title))
-      throw new Error(
-        `Cannot remove the property: Property with title ${title} does not exist on the storage. Create it first`
-      );
+    if (!this.field.hasOwnProperty(title)) return false;
 
     // Remove field
     delete this.field[title];
 
     // Update the storage
     this.save();
+
+    return true;
   }
 
   getProperty(title) {
-    if (!this.field.hasOwnProperty(title))
-      throw new Error(
-        `Cannot receive the property: Property with title ${title} does not exist in storage`
-      );
-
     return this.field[title];
   }
 
   updateProperty(title, newValue) {
-    if (!this.field.hasOwnProperty(title))
-      throw new Error(
-        `Cannot update the property: Property with title ${title} does not exist in storage`
-      );
-
+    if (!this.field.hasOwnProperty(title)) return false;
     // Update the property
     this.field[title] = newValue;
 
     // Save changes to the storage
     this.save();
+
+    return true;
+  }
+
+  updateProperties(newValues) {
+    Object.keys(newValues).forEach(key => {
+      this.updateProperty(key, newValues[key]);
+    });
+  }
+
+  hasProperty(title) {
+    return Boolean(this.getProperty(title));
   }
 }

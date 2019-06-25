@@ -12,6 +12,8 @@
   height: var(--height);
 
   border-radius: 5px;
+
+  position: relative;
 }
 
 .shortcut:hover {
@@ -42,6 +44,30 @@
 
   font-weight: 500;
   font-size: 1.5em;
+}
+
+.shortcut-config-icon {
+  display: none;
+}
+
+.shortcut:hover .shortcut-config-icon {
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+
+  top: 0;
+  right: 0;
+
+  fill: rgba(0, 0, 0, 0.4);
+}
+
+.shortcut:hover .shortcut-config-icon:hover {
+  fill: rgba(0, 0, 0, 0.8);
+}
+
+.shortcut.--shaped .shortcut-config-icon {
+  display: none;
 }
 
 .shortcut.--shaped .shortcut-icon {

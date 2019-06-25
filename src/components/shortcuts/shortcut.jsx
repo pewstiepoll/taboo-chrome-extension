@@ -3,12 +3,25 @@ import PropTypes from "prop-types";
 
 import styles from "./shortcut.module.css";
 
+const ConfigIcon = ({ size = 100, bulletSize = 3, itemClass, ...props }) => (
+  <svg
+    {...props}
+    viewBox={`0 0 ${size} ${size}`}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+      <circle cx={size * (3 / 6)} cy={size * (2 / 6)} r={bulletSize} />
+      <circle cx={size * (3 / 6)} cy={size * (3 / 6)} r={bulletSize} />
+      <circle cx={size * (3 / 6)} cy={size * (4 / 6)} r={bulletSize} />
+  </svg>
+);
+
 export default function Shortcut({
   title,
   link,
   icon,
   className,
   isShape,
+  onConfigClick,
   ...rest
 }) {
   const iconToRender = icon || title.charAt(0).toUpperCase();
@@ -22,6 +35,11 @@ export default function Shortcut({
       href={link}
       {...rest}
     >
+      <ConfigIcon
+        onClick={onConfigClick}
+        size={50}
+        className={styles["shortcut-config-icon"]}
+      />
       <div className={styles["shortcut-icon"]}>{iconToRender}</div>
       <div className={styles["shortcut-title-container"]}>
         <span className={styles["shortcut-title"]}>{title}</span>

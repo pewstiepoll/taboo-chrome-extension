@@ -33,10 +33,15 @@ const ShortcutCategory = withModal(function ShortcutCategory({
   shortcuts,
   openModal,
   closeModal,
-  addShortcut,
-  updateCategory,
-  removeCategory
+  actions
 }) {
+  const {
+    addShortcut,
+    updateCategory,
+    removeCategory,
+    updateShortcut
+  } = actions;
+
   return (
     <>
       <button
@@ -84,7 +89,54 @@ const ShortcutCategory = withModal(function ShortcutCategory({
       </button>
       <div className="shortcuts">
         {shortcuts.map(({ id, title, link }) => (
-          <Shortcut key={id} title={title} link={link} />
+          <Shortcut
+            key={id}
+            title={title}
+            link={link}
+            onConfigClick={e => {
+              e.preventDefault();
+              openModal({
+                title: "Update shortcut",
+                fields: [
+                  {
+                    name: "shortcut_title",
+                    label: "Shortcut title",
+                    placeholder: "Shortcut title",
+                    defaultValue: title
+                  },
+                  {
+                    name: "shortcut_link",
+                    label: "Shortcut label",
+                    placeholder: "Shortcut label",
+                    defaultValue: link
+                  }
+                ],
+                buttons: [
+                  {
+                    children: "Remove",
+                    styleType: "notice",
+                    type: "button",
+                    onClick: closeModal
+                  },
+                  {
+                    children: "Update",
+                    type: "submit"
+                  },
+                  {
+                    children: "Cancel",
+                    styleType: "danger",
+                    type: "button",
+                    onClick: closeModal
+                  }
+                ],
+                onSubmit: ({ shortcut_title: title, shortcut_link: link }) => {
+                  if (!title || !link) return;
+
+                  updateShortcut({ id }, { title, link });
+                }
+              });
+            }}
+          />
         ))}
         <Shortcut
           title="Add shortcut"
@@ -190,7 +242,6 @@ const AddCategoryButton = withModal(function AddCategoryButton({
 
 export default React.memo(function Shortcuts() {
   const { shortcuts, categories, actions } = useShortcuts();
-  const { addShortcut, addCategory, updateCategory, removeCategory } = actions;
 
   return (
     <div className={styles.container}>
@@ -199,14 +250,12 @@ export default React.memo(function Shortcuts() {
           key={category.id}
           category={category}
           shortcuts={shortcuts.filter(
-            shortcut => shortcut.category_id === category.id
+            shortcut => shortcut && shortcut.category_id === category.id
           )}
-          addShortcut={addShortcut}
-          updateCategory={updateCategory}
-          removeCategory={removeCategory}
+          actions={actions}
         />
       ))}
-      <AddCategoryButton addCategory={addCategory} />
+      <AddCategoryButton addCategory={actions.addCategory} />
     </div>
   );
 });

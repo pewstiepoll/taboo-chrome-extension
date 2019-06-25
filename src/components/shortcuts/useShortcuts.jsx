@@ -3,7 +3,8 @@ import { useReducer, useEffect } from "react";
 import {
   Storage,
   LocalStorageStorageStrategy,
-  ShortcutCategory
+  ShortcutCategory,
+  Shortcut
 } from "../../classes";
 import { bindActionCreator } from "../../utils";
 
@@ -78,7 +79,16 @@ export const initialState = {
   categories: storage.getProperty("categories").map(({ id, title }) => {
     return ShortcutCategory.factory(id, title);
   }),
-  shortcuts: storage.getProperty("shortcuts")
+  shortcuts: storage
+    .getProperty("shortcuts")
+    .map(({ id, category_id, title, link }) => {
+      return Shortcut.factory({
+        id,
+        category_id,
+        title,
+        link
+      });
+    })
 };
 
 /**
@@ -149,7 +159,7 @@ function shortcutsStateReducer({ categories, shortcuts }, { type, payload }) {
             shortcut.title === payload.title ||
             shortcut.link === payload.link
           ) {
-            return shortcut.update(payload.updates);
+            shortcut.update(payload.updates);
           }
 
           return shortcut;

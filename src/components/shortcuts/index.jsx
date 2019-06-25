@@ -111,12 +111,6 @@ const ShortcutCategory = withModal(function ShortcutCategory({
                   styleType: "danger",
                   children: "Cancel",
                   onClick: closeModal
-                },
-                {
-                  type: "button",
-                  styleType: "danger",
-                  children: "Cancel",
-                  onClick: closeModal
                 }
               ],
               onSubmit: ({ shortcut_title, shortcut_link }) => {

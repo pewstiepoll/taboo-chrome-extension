@@ -1,0 +1,13 @@
+:root {
+  --primary: hsl(229, 100%, 90%);
+  --primary-hover: hsl(229, 100%, 85%);
+  --primary-focus: hsl(229, 94%, 75%);
+
+  --notice: hsl(400, 100%, 90%);
+  --notice-hover: hsl(400, 100%, 85%);
+  --notice-focus: hsl(400, 100%, 75%);
+
+  --danger: hsl(0, 100%, 90%);
+  --danger-hover: hsl(0, 100%, 85%);
+  --danger-focus: hsl(0, 100%, 75%);
+}

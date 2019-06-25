@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { bindActionCreator } from "../../utils";
 
 /**
@@ -151,6 +151,10 @@ export default function useShortcuts() {
     shortcutsStateReducer,
     initialState
   );
+
+  useEffect(() => {
+    // TODO: Persist data in localstorage
+  }, [shortcuts, categories]);
 
   // Create actions for manipulating categories
   const actions = {

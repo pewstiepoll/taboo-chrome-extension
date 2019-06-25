@@ -1,5 +1,16 @@
 import { useReducer, useEffect } from "react";
+
+import { Storage, LocalStorageStorageStrategy } from "../../classes";
 import { bindActionCreator } from "../../utils";
+
+/**
+ * Initialize storage
+ */
+const storage = new Storage("shortcuts", new LocalStorageStorageStrategy());
+
+if (!storage.hasProperty("shortcuts")) storage.addProperty("shortcuts", []);
+
+if (!storage.hasProperty("categories")) storage.addProperty("categories", []);
 
 /**
  * Action types
@@ -60,8 +71,8 @@ export const updateShortcut = ({ id, title, link }, updates) => ({
  * Default state for shortcuts reducer
  */
 export const initialState = {
-  categories: [],
-  shortcuts: []
+  categories: storage.getProperty("categories"),
+  shortcuts: storage.getProperty("shortcuts")
 };
 
 /**
@@ -153,7 +164,11 @@ export default function useShortcuts() {
   );
 
   useEffect(() => {
-    // TODO: Persist data in localstorage
+    // Persist data in localstorage
+    storage.updateProperties({
+      shortcuts,
+      categories
+    });
   }, [shortcuts, categories]);
 
   // Create actions for manipulating categories

@@ -20,8 +20,10 @@ import React from "react";
 import Shortcut from "./shortcut";
 import useShortcuts from "./useShortcuts";
 import uuidV4 from "uuid/v4";
-import ShortcutClass from "../../classes/Shortcut";
-import CategoryClass from "../../classes/ShortcutCategory";
+import {
+  Shortcut as ShortcutClass,
+  ShortcutCategory as CategoryClass
+} from "../../classes";
 import { withModal } from "../modal";
 
 import styles from "./shortcuts-list.module.css";

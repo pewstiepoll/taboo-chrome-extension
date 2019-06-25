@@ -34,7 +34,8 @@ const ShortcutCategory = withModal(function ShortcutCategory({
   openModal,
   closeModal,
   addShortcut,
-  updateCategory
+  updateCategory,
+  removeCategory
 }) {
   return (
     <>
@@ -53,7 +54,11 @@ const ShortcutCategory = withModal(function ShortcutCategory({
               {
                 children: "Remove",
                 type: "button",
-                styleType: "notice"
+                styleType: "notice",
+                onClick: () => {
+                  removeCategory({ id: category.id });
+                  closeModal();
+                }
               },
               {
                 children: "Update",
@@ -186,7 +191,7 @@ const AddCategoryButton = withModal(function AddCategoryButton({
 
 export default React.memo(function Shortcuts() {
   const { shortcuts, categories, actions } = useShortcuts();
-  const { addShortcut, addCategory, updateCategory } = actions;
+  const { addShortcut, addCategory, updateCategory, removeCategory } = actions;
 
   return (
     <div className={styles.container}>
@@ -199,6 +204,7 @@ export default React.memo(function Shortcuts() {
           )}
           addShortcut={addShortcut}
           updateCategory={updateCategory}
+          removeCategory={removeCategory}
         />
       ))}
       <AddCategoryButton addCategory={addCategory} />

@@ -24,9 +24,6 @@ const createFields = fields => () => {
 
   return fields.map(fieldProps => (
     <div className={styles["field"]} key={fieldProps.name}>
-      <label className={styles["field-label"]} htmlFor={fieldProps.name}>
-        {fieldProps.label || fieldProps.placeholder || fieldProps.name}
-      </label>
       <input
         className={styles["field-input"]}
         ref={input => {
@@ -35,6 +32,9 @@ const createFields = fields => () => {
         key={fieldProps.name}
         {...fieldProps}
       />
+      <label className={styles["field-label"]} htmlFor={fieldProps.name}>
+        {fieldProps.label || fieldProps.placeholder || fieldProps.name}
+      </label>
     </div>
   ));
 };

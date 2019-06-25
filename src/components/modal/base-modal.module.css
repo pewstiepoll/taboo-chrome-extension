@@ -46,7 +46,7 @@
 
 .field {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   width: 100%;
 }
@@ -61,4 +61,11 @@
 .field-input {
   padding: 10px;
   outline: none;
+
+  position: relative;
+  z-index: 3;
+}
+
+.field-input:focus ~ label {
+  color: var(--primary-focus);
 }

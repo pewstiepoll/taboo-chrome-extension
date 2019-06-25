@@ -1,4 +1,4 @@
-export default class ShortcutCategory {
+export class ShortcutCategory {
   static factory(id, title) {
     return new ShortcutCategory(id, title);
   }

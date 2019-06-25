@@ -1,19 +1,19 @@
 import AbstractStrategy from "./abstract-strategy";
 
-export default class LocalStorageStorageStrategy extends AbstractStrategy {
+export class LocalStorageStorageStrategy extends AbstractStrategy {
   init() {
     // Empty method for localstorage strategy
   }
 
-  getField(field) {
-    const result = window.localStorage.getItem(field);
+  getField(fieldName) {
+    const result = window.localStorage.getItem(fieldName);
 
     if (!result) {
-      this.setField({});
+      this.setField(fieldName, {});
       return {};
     }
 
-    return result;
+    return JSON.parse(result);
   }
 
   setField(field, newValue) {

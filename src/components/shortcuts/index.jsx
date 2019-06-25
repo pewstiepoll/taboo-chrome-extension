@@ -178,7 +178,6 @@ const AddCategoryButton = withModal(function AddCategoryButton({
 
             const newCategory = CategoryClass.factory(uuidV4(), category_name);
 
-            console.log("new category created: ", newCategory);
             addCategory(newCategory);
           }
         });

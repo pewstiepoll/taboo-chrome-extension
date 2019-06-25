@@ -21,46 +21,46 @@
 }
 
 .button--primary {
-  background-color: hsl(229, 100%, 90%);
+  background-color: var(--primary);
   border: 1px solid hsl(229, 100%, 85%);
 }
 
 .button--primary:hover {
-  background-color: hsl(229, 100%, 85%);
+  background-color: var(--primary-hover);
   border: 1px solid hsl(229, 94%, 80%);
 }
 
 .button--primary:focus {
-  background-color: hsl(229, 94%, 75%);
+  background-color: var(--primary-focus);
   border: 1px solid hsl(229, 94%, 70%);
 }
 
 .button--notice {
-  background-color: hsl(400, 100%, 90%);
+  background-color: var(--notice);
   border: 1px solid hsl(400, 100%, 85%);
 }
 
 .button--notice:hover {
-  background-color: hsl(400, 100%, 85%);
+  background-color: var(--notice-hover);
   border: 1px solid hsl(400, 100%, 80%);
 }
 
 .button--notice:focus {
-  background-color: hsl(400, 100%, 75%);
+  background-color: var(--notice-focus);
   border: 1px solid hsl(400, 100%, 70%);
 }
 
 .button--danger {
-  background-color: hsl(0, 100%, 90%);
+  background-color: var(--danger);
   border: 1px solid hsl(0, 100%, 85%);
 }
 
 .button--danger:hover {
-  background-color: hsl(0, 100%, 85%);
+  background-color: var(--danger-hover);
   border: 1px solid hsl(0, 100%, 80%);
 }
 
 .button--danger:focus {
-  background-color: hsl(0, 100%, 75%);
+  background-color: var(--danger-focus);
   border: 1px solid hsl(0, 100%, 70%);
 }

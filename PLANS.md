@@ -13,5 +13,5 @@
 - [x] Shortcut icon is the first letter of the title
 - [x] Shortcut icon background is a fixed color
 - [ ] Shortcuts have only one _default_ category
-- [ ] Shortcuts have _settings_ button in right top corner
-- [ ] Shortcuts can be removed/changed from popup menu invoked by _settings_ button
+- [x] Shortcuts have _settings_ button in right top corner
+- [x] Shortcuts can be removed/changed from popup menu invoked by _settings_ button

@@ -39,7 +39,8 @@ const ShortcutCategory = withModal(function ShortcutCategory({
     addShortcut,
     updateCategory,
     removeCategory,
-    updateShortcut
+    updateShortcut,
+    removeShortcut
   } = actions;
 
   return (
@@ -116,7 +117,11 @@ const ShortcutCategory = withModal(function ShortcutCategory({
                     children: "Remove",
                     styleType: "notice",
                     type: "button",
-                    onClick: closeModal
+                    onClick: () => {
+                      removeShortcut({ id });
+
+                      closeModal();
+                    }
                   },
                   {
                     children: "Update",

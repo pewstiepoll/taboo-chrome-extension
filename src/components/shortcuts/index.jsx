@@ -20,13 +20,18 @@ import React from "react";
 import Shortcut from "./shortcut";
 import useShortcuts from "./useShortcuts";
 import uuidV4 from "uuid/v4";
-// import ShortcutClass from "../../classes/Shortcut";
+import ShortcutClass from "../../classes/Shortcut";
 import CategoryClass from "../../classes/ShortcutCategory";
 import { withModal } from "../modal";
 
 import styles from "./shortcuts-list.module.css";
 
-function ShortcutCategory({ category, shortcuts }) {
+const ShortcutCategory = withModal(function ShortcutCategory({
+  category,
+  shortcuts,
+  openModal,
+  addShortcut
+}) {
   return (
     <>
       <h3 className={styles["shortcuts-category-title"]}>{category.title}</h3>
@@ -34,11 +39,48 @@ function ShortcutCategory({ category, shortcuts }) {
         {shortcuts.map(({ id, title, link }) => (
           <Shortcut key={id} title={title} link={link} />
         ))}
-        <Shortcut title="Add shortcut" icon="+" isShape={true} />
+        <Shortcut
+          title="Add shortcut"
+          icon="+"
+          isShape={true}
+          onClick={e => {
+            e.preventDefault();
+
+            openModal({
+              title: "New shortcut",
+              fields: [
+                {
+                  type: "text",
+                  name: "shortcut_title",
+                  placeholder: "Shortcut title...",
+                  label: "Shortcut title"
+                },
+                {
+                  type: "text",
+                  name: "shortcut_link",
+                  placeholder: "Shortcut link...",
+                  label: "Shortcut link"
+                }
+              ],
+              onSubmit: ({ shortcut_title, shortcut_link }) => {
+                if (shortcut_title && shortcut_link) {
+                  const newShortcut = ShortcutClass.factory({
+                    id: uuidV4(),
+                    category_id: category.id,
+                    title: shortcut_title,
+                    link: shortcut_link
+                  });
+
+                  addShortcut(newShortcut);
+                }
+              }
+            });
+          }}
+        />
       </div>
     </>
   );
-}
+});
 
 const modalStaticParams = {
   title: "Add category",
@@ -74,6 +116,7 @@ const AddCategoryButton = withModal(function AddCategoryButton({
 
             const newCategory = CategoryClass.factory(uuidV4(), category_name);
 
+            console.log("new category created: ", newCategory);
             addCategory(newCategory);
           }
         });
@@ -86,7 +129,7 @@ const AddCategoryButton = withModal(function AddCategoryButton({
 
 export default React.memo(function Shortcuts() {
   const { shortcuts, categories, actions } = useShortcuts();
-  const { addCategory } = actions;
+  const { addShortcut, addCategory } = actions;
 
   return (
     <div className={styles.container}>
@@ -95,8 +138,9 @@ export default React.memo(function Shortcuts() {
           key={category.id}
           category={category}
           shortcuts={shortcuts.filter(
-            shortcut => (shortcut.category_id = category.id)
+            shortcut => shortcut.category_id === category.id
           )}
+          addShortcut={addShortcut}
         />
       ))}
       <AddCategoryButton addCategory={addCategory} />

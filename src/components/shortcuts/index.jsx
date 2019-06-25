@@ -32,11 +32,51 @@ const ShortcutCategory = withModal(function ShortcutCategory({
   category,
   shortcuts,
   openModal,
-  addShortcut
+  closeModal,
+  addShortcut,
+  updateCategory
 }) {
   return (
     <>
-      <h3 className={styles["shortcuts-category-title"]}>{category.title}</h3>
+      <button
+        onClick={() => {
+          openModal({
+            title: "Update category",
+            fields: [
+              {
+                label: "Category title",
+                name: "category_title",
+                defaultValue: category.title
+              }
+            ],
+            buttons: [
+              {
+                children: "Remove",
+                type: "button",
+                styleType: "notice"
+              },
+              {
+                children: "Update",
+                type: "submit"
+              },
+              {
+                children: "Cancel",
+                type: "button",
+                styleType: "danger",
+                onClick: closeModal
+              }
+            ],
+            onSubmit: ({ category_title }) => {
+              if (!category_title) return;
+
+              updateCategory({ id: category.id }, { title: category_title });
+            }
+          });
+        }}
+        className={styles["shortcuts-category-title"]}
+      >
+        {category.title}
+      </button>
       <div className="shortcuts">
         {shortcuts.map(({ id, title, link }) => (
           <Shortcut key={id} title={title} link={link} />
@@ -64,6 +104,21 @@ const ShortcutCategory = withModal(function ShortcutCategory({
                   label: "Shortcut link"
                 }
               ],
+              buttons: [
+                { type: "submit", children: "Add" },
+                {
+                  type: "button",
+                  styleType: "danger",
+                  children: "Cancel",
+                  onClick: closeModal
+                },
+                {
+                  type: "button",
+                  styleType: "danger",
+                  children: "Cancel",
+                  onClick: closeModal
+                }
+              ],
               onSubmit: ({ shortcut_title, shortcut_link }) => {
                 if (shortcut_title && shortcut_link) {
                   const newShortcut = ShortcutClass.factory({
@@ -84,20 +139,9 @@ const ShortcutCategory = withModal(function ShortcutCategory({
   );
 });
 
-const modalStaticParams = {
-  title: "Add category",
-  fields: [
-    {
-      name: "category_name",
-      placeholder: "Category name...",
-      type: "text",
-      label: "Category name"
-    }
-  ]
-};
-
 const AddCategoryButton = withModal(function AddCategoryButton({
   openModal,
+  closeModal,
   addCategory
 }) {
   const classes = [
@@ -110,7 +154,24 @@ const AddCategoryButton = withModal(function AddCategoryButton({
       className={classes}
       onClick={() => {
         openModal({
-          ...modalStaticParams,
+          title: "Add category",
+          fields: [
+            {
+              name: "category_name",
+              placeholder: "Category name...",
+              type: "text",
+              label: "Category name"
+            }
+          ],
+          buttons: [
+            { type: "submit", children: "Add" },
+            {
+              type: "button",
+              styleType: "danger",
+              children: "Cancel",
+              onClick: closeModal
+            }
+          ],
           onSubmit: results => {
             const { category_name } = results;
 
@@ -131,7 +192,7 @@ const AddCategoryButton = withModal(function AddCategoryButton({
 
 export default React.memo(function Shortcuts() {
   const { shortcuts, categories, actions } = useShortcuts();
-  const { addShortcut, addCategory } = actions;
+  const { addShortcut, addCategory, updateCategory } = actions;
 
   return (
     <div className={styles.container}>
@@ -143,6 +204,7 @@ export default React.memo(function Shortcuts() {
             shortcut => shortcut.category_id === category.id
           )}
           addShortcut={addShortcut}
+          updateCategory={updateCategory}
         />
       ))}
       <AddCategoryButton addCategory={addCategory} />

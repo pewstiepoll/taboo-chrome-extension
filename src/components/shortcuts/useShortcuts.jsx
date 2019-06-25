@@ -1,6 +1,10 @@
 import { useReducer, useEffect } from "react";
 
-import { Storage, LocalStorageStorageStrategy } from "../../classes";
+import {
+  Storage,
+  LocalStorageStorageStrategy,
+  ShortcutCategory
+} from "../../classes";
 import { bindActionCreator } from "../../utils";
 
 /**
@@ -71,7 +75,9 @@ export const updateShortcut = ({ id, title, link }, updates) => ({
  * Default state for shortcuts reducer
  */
 export const initialState = {
-  categories: storage.getProperty("categories"),
+  categories: storage.getProperty("categories").map(({ id, title }) => {
+    return ShortcutCategory.factory(id, title);
+  }),
   shortcuts: storage.getProperty("shortcuts")
 };
 

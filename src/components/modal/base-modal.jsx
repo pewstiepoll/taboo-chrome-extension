@@ -39,10 +39,15 @@ const createFields = fields => () => {
   ));
 };
 
+const createButtons = buttons => () => {
+  return buttons.map((buttonProps, id) => <Button key={id} {...buttonProps} />);
+};
+
 const BaseModal = withModal(function BaseModal({ modal, closeModal }) {
-  const { fields = [] } = modal.params;
+  const { fields = [], buttons = [] } = modal.params;
 
   const Fields = createFields(fields);
+  const Buttons = createButtons(buttons);
 
   return (
     <Modal {...modal}>
@@ -70,10 +75,7 @@ const BaseModal = withModal(function BaseModal({ modal, closeModal }) {
           >
             <Fields />
             <div className={styles["modal-footer"]}>
-              <Button type="submit">Add</Button>
-              <Button styleType="danger" type="button" onClick={closeModal}>
-                Cancel
-              </Button>
+              <Buttons />
             </div>
           </form>
         </div>
@@ -87,6 +89,7 @@ BaseModal.defaultProps = {
     params: {
       title: "",
       fields: [],
+      buttons: [],
       onSubmit: () => {}
     }
   }
@@ -97,9 +100,10 @@ BaseModal.propTypes = {
     params: PropTypes.shape({
       title: PropTypes.string,
       fields: PropTypes.array,
+      buttons: PropTypes.array,
       onSubmit: PropTypes.func.isRequired
     })
   })
 };
 
-export default BaseModal;
+export default React.memo(BaseModal);

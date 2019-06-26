@@ -53,6 +53,7 @@
 
 **Other**
 
+- [ ] Storybook for visual primitives
 - [ ] Test coverage >90%
 - [ ] CI with Travis for linting, tests
 - [ ] Fast TTI by lazyloading components

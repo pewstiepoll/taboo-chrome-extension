@@ -49,5 +49,5 @@ Button.propTypes = {
     bordered: PropTypes.bool
   }),
   text: PropTypes.string,
-  children: PropTypes.bool
+  children: PropTypes.string
 };

@@ -58,22 +58,22 @@ const ShortcutCategory = withModal(function ShortcutCategory({
             ],
             buttons: [
               {
-                children: "Remove",
+                text: "Remove",
                 type: "button",
-                styleType: "notice",
+                config: { type: "notice" },
                 onClick: () => {
                   removeCategory({ id: category.id });
                   closeModal();
                 }
               },
               {
-                children: "Update",
+                text: "Update",
                 type: "submit"
               },
               {
-                children: "Cancel",
+                text: "Cancel",
                 type: "button",
-                styleType: "danger",
+                config: { type: "danger" },
                 onClick: closeModal
               }
             ],
@@ -114,8 +114,8 @@ const ShortcutCategory = withModal(function ShortcutCategory({
                 ],
                 buttons: [
                   {
-                    children: "Remove",
-                    styleType: "notice",
+                    text: "Remove",
+                    config: { type: "notice" },
                     type: "button",
                     onClick: () => {
                       removeShortcut({ id });
@@ -124,12 +124,12 @@ const ShortcutCategory = withModal(function ShortcutCategory({
                     }
                   },
                   {
-                    children: "Update",
+                    text: "Update",
                     type: "submit"
                   },
                   {
-                    children: "Cancel",
-                    styleType: "danger",
+                    text: "Cancel",
+                    config: { type: "danger" },
                     type: "button",
                     onClick: closeModal
                   }
@@ -167,11 +167,13 @@ const ShortcutCategory = withModal(function ShortcutCategory({
                 }
               ],
               buttons: [
-                { type: "submit", children: "Add" },
+                { type: "submit", text: "Add" },
                 {
                   type: "button",
-                  styleType: "danger",
-                  children: "Cancel",
+                  config: {
+                    type: "danger"
+                  },
+                  text: "Cancel",
                   onClick: closeModal
                 }
               ],
@@ -220,11 +222,13 @@ const AddCategoryButton = withModal(function AddCategoryButton({
             }
           ],
           buttons: [
-            { type: "submit", children: "Add" },
+            { type: "submit", text: "Add" },
             {
               type: "button",
-              styleType: "danger",
-              children: "Cancel",
+              config: {
+                type: "danger"
+              },
+              text: "Cancel",
               onClick: closeModal
             }
           ],

@@ -17,7 +17,7 @@
 
 **TODO**
 
-- [ ] Create new todo
+- [ ] Create a new todo
 - [ ] Mark todos as completed
 - [ ] Remove todos
 - [ ] Update todos
@@ -44,6 +44,12 @@
 - [ ] Create items for the column
 - [ ] Update item
 - [ ] Remove item
+
+**Money goal**
+
+- [ ] Set new money goal to reach
+- [ ] Increase current money value
+- [ ] Reflect reaching the money goal with congratulations
 
 **Other**
 

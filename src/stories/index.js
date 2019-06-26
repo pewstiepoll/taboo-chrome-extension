@@ -1,19 +1,43 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+import { storiesOf } from "@storybook/react";
+// import { linkTo } from '@storybook/addon-links';
 
-import { Button, Welcome } from '@storybook/react/demo';
+import { Button } from "../components/primitives";
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+const Group = ({ title, colWidth = 100, children }) => (
+  <>
+    <h4>{title}:</h4>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(auto-fit, ${colWidth}px)`
+      }}
+    >
+      {children}
+    </div>
+  </>
+);
 
-storiesOf('Button', module)
-  .add('with text', () => <Button onClick={action('clicked')}>Hello Button</Button>)
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  ));
+storiesOf("Primitives", module).add("Buttons", () => (
+  <div>
+    <Group title="Types">
+      <Button>Primary</Button>
+      <Button config={{ type: "notice" }}>Notice</Button>
+      <Button config={{ type: "danger" }}>Danger</Button>
+    </Group>
+    <Group title="Sizes">
+      <Button config={{ size: "short" }}>Short</Button>
+      <Button config={{ size: "standard" }}>Standard</Button>
+      <Button config={{ size: "long" }}>Long</Button>
+    </Group>
+    <Group title="Background">
+      <Button config={{ backgrounded: true }}>True</Button>
+      <Button config={{ backgrounded: false }}>False</Button>
+    </Group>
+    <Group title="Border">
+      <Button config={{ backgrounded: false, bordered: true }}>True</Button>
+      <Button config={{ backgrounded: false, bordered: false }}>False</Button>
+    </Group>
+  </div>
+));

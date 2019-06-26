@@ -1,13 +1,37 @@
 :root {
-  --primary: hsl(229, 100%, 90%);
-  --primary-hover: hsl(229, 100%, 85%);
-  --primary-focus: hsl(229, 94%, 75%);
+  --primary-background: hsl(229, 100%, 90%);
+  --primary-border: hsl(229, 94%, 85%);
 
-  --notice: hsl(400, 100%, 90%);
-  --notice-hover: hsl(400, 100%, 85%);
-  --notice-focus: hsl(400, 100%, 75%);
+  --primary-hover-background: hsl(229, 100%, 85%);
+  --primary-hover-border: hsl(229, 94%, 80%);
 
-  --danger: hsl(0, 100%, 90%);
-  --danger-hover: hsl(0, 100%, 85%);
-  --danger-focus: hsl(0, 100%, 75%);
+  --primary-focus-background: hsl(229, 94%, 80%);
+  --primary-focus-border: hsl(229, 94%, 75%);
+
+  --primary-active-background: hsl(229, 94%, 75%);
+  --primary-active-border: hsl(229, 94%, 60%);
+
+  --notice-background: hsl(400, 100%, 90%);
+  --notice-border: hsl(400, 100%, 85%);
+
+  --notice-hover-background: hsl(400, 100%, 85%);
+  --notice-hover-border: hsl(400, 100%, 80%);
+
+  --notice-focus-background: hsl(400, 100%, 80%);
+  --notice-focus-border: hsl(400, 100%, 75%);
+
+  --notice-active-background: hsl(400, 100%, 75%);
+  --notice-active-border: hsl(400, 100%, 60%);
+
+  --danger-background: hsl(0, 100%, 90%);
+  --danger-border: hsl(0, 100%, 85%);
+
+  --danger-hover-background: hsl(0, 100%, 85%);
+  --danger-hover-border: hsl(0, 100%, 80%);
+
+  --danger-focus-background: hsl(0, 100%, 80%);
+  --danger-focus-border: hsl(0, 100%, 75%);
+
+  --danger-focus-background: hsl(0, 100%, 75%);
+  --danger-focus-border: hsl(0, 100%, 70%);
 }

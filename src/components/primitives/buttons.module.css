@@ -1,3 +1,5 @@
+@import "./colors.module.css";
+
 .button {
   padding: 10px 15px;
   outline: none;
@@ -8,11 +10,14 @@
   border: none;
 }
 
+/* Button length */
 .button--short {
+  padding: 10px 5px;
   width: 50px;
 }
 
 .button--standard {
+  padding: 10px;
   width: 70px;
 }
 
@@ -20,47 +25,76 @@
   width: 100px;
 }
 
-.button--primary {
-  background-color: var(--primary);
-  border: 1px solid hsl(229, 100%, 85%);
+/*** Button color styles for backgrounded and bordered buttons ***/
+
+/* Primary */
+.button--primary__backgrounded {
+  background-color: var(--primary-background);
 }
 
-.button--primary:hover {
-  background-color: var(--primary-hover);
-  border: 1px solid hsl(229, 94%, 80%);
+.button--primary__bordered {
+  border: 1px solid var(--primary-border);
 }
 
-.button--primary:focus {
-  background-color: var(--primary-focus);
-  border: 1px solid hsl(229, 94%, 70%);
+.button--primary__backgrounded:hover {
+  background-color: var(--primary-hover-background);
 }
 
-.button--notice {
-  background-color: var(--notice);
-  border: 1px solid hsl(400, 100%, 85%);
+.button--primary__boredered:hover {
+  border: 1px solid var(--primary-hover-border);
 }
 
-.button--notice:hover {
-  background-color: var(--notice-hover);
-  border: 1px solid hsl(400, 100%, 80%);
+.button--primary__backgrounded:focus {
+  background-color: var(--primary-focus-background);
 }
 
-.button--notice:focus {
-  background-color: var(--notice-focus);
-  border: 1px solid hsl(400, 100%, 70%);
+.button--primary__bordered:focus {
+  border: 1px solid var(--primary-focus-border);
 }
 
-.button--danger {
-  background-color: var(--danger);
-  border: 1px solid hsl(0, 100%, 85%);
+/* Notice */
+.button--notice__backgrounded {
+  background-color: var(--notice-background);
 }
 
-.button--danger:hover {
-  background-color: var(--danger-hover);
-  border: 1px solid hsl(0, 100%, 80%);
+.button--notice__bordered {
+  border: 1px solid var(--notice-border);
 }
 
-.button--danger:focus {
-  background-color: var(--danger-focus);
-  border: 1px solid hsl(0, 100%, 70%);
+.button--notice__backgrounded:hover {
+  background-color: var(--notice-hover-background);
+}
+
+.button--notice__bordered:hover {
+  border: 1px solid var(--notice-hover-border);
+}
+
+.button--notice__backgrounded:focus {
+  background-color: var(--notice-focus-background);
+}
+
+.button--notice__bordered:focus {
+  border: 1px solid var(--notice-focus-border);
+}
+
+/* Danger */
+.button--danger__backgrounded {
+  background-color: var(--danger-background);
+}
+.button--danger__bordered {
+  border: 1px solid var(--danger-border);
+}
+
+.button--danger__backgrounded:hover {
+  background-color: var(--danger-hover-background);
+}
+.button--danger__bordered:hover {
+  border: 1px solid var(--danger-hover-border);
+}
+
+.button--danger__backgrounded:focus {
+  background-color: var(--danger-focus-background);
+}
+.button--danger__bordered:focus {
+  border: 1px solid var(--danger-focus-border);
 }

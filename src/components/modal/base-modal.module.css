@@ -69,5 +69,5 @@
 }
 
 .field-input:focus ~ label {
-  color: var(--primary-focus);
+  color: var(--primary-focus-background);
 }

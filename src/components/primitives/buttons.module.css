@@ -25,6 +25,10 @@
   width: 100px;
 }
 
+.button--fit {
+  width: auto;
+}
+
 /*** Button color styles for backgrounded and bordered buttons ***/
 
 /* Primary */

@@ -10,7 +10,7 @@ export const buttonDefaultConfigProps = {
   bordered: true
 };
 
-export function getStyleClasses(config) {
+export function getStyleClasses(config, propClassName) {
   const { type, size, backgrounded, bordered } = {
     ...buttonDefaultConfigProps,
     ...config
@@ -26,11 +26,15 @@ export function getStyleClasses(config) {
     classes.push(styles[`button--${type}__bordered`]);
   }
 
+  if (typeof propClassName === "string" && propClassName.length) {
+    classes.push(propClassName);
+  }
+
   return classes.length ? classes.join(" ") : "";
 }
 
-export const Button = ({ config, text, children, ...props }) => (
-  <button className={getStyleClasses(config)} {...props}>
+export const Button = ({ config, text, children, className, ...props }) => (
+  <button className={getStyleClasses(config, className)} {...props}>
     {text || children}
   </button>
 );
@@ -44,7 +48,7 @@ Button.defaultProps = {
 Button.propTypes = {
   config: PropTypes.shape({
     type: PropTypes.oneOf(["primary", "notice", "danger"]),
-    size: PropTypes.oneOf(["short", "standard", "long"]),
+    size: PropTypes.oneOf(["short", "standard", "long", "fit"]),
     backgrounded: PropTypes.bool,
     bordered: PropTypes.bool
   }),

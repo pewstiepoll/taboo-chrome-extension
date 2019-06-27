@@ -1,9 +1,9 @@
 @import "./shortcuts.variables.css";
 
-.container {
+.shortcuts-module {
   width: 450px;
   overflow-x: auto;
-  height: 100vh;
+  max-height: 100vh;
 }
 
 .shortcuts-category-title {

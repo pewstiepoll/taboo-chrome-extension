@@ -302,7 +302,7 @@ export default React.memo(function Shortcuts() {
   const { shortcuts, categories, actions } = useShortcuts();
 
   return (
-    <div className={styles.container}>
+    <div className={styles["shortcuts-module"]}>
       {categories.map(category => (
         <ShortcutCategory
           key={category.id}

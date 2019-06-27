@@ -27,6 +27,197 @@ import {
 import { withModal } from "../modal";
 
 import styles from "./shortcuts-list.module.css";
+import { Button } from "../primitives";
+
+/**
+ * Modal open functions
+ */
+const openAddCategoryModal = ({ openModal, closeModal, addCategory }) =>
+  openModal({
+    title: "Add category",
+    fields: [
+      {
+        name: "category_name",
+        placeholder: "Category name...",
+        type: "text",
+        label: "Category name"
+      }
+    ],
+    buttons: [
+      { type: "submit", text: "Add" },
+      {
+        type: "button",
+        config: {
+          type: "danger"
+        },
+        text: "Cancel",
+        onClick: closeModal
+      }
+    ],
+    onSubmit: results => {
+      const { category_name } = results;
+
+      if (!category_name) return;
+
+      const newCategory = CategoryClass.factory(uuidV4(), category_name);
+
+      addCategory(newCategory);
+    }
+  });
+
+const openAddShortcutModal = ({
+  openModal,
+  closeModal,
+  addShortcut,
+  category_id
+}) =>
+  openModal({
+    title: "New shortcut",
+    fields: [
+      {
+        type: "text",
+        name: "shortcut_title",
+        placeholder: "Shortcut title...",
+        label: "Shortcut title"
+      },
+      {
+        type: "text",
+        name: "shortcut_link",
+        placeholder: "Shortcut link...",
+        label: "Shortcut link"
+      }
+    ],
+    buttons: [
+      { type: "submit", text: "Add" },
+      {
+        type: "button",
+        config: {
+          type: "danger"
+        },
+        text: "Cancel",
+        onClick: closeModal
+      }
+    ],
+    onSubmit: ({ shortcut_title, shortcut_link }) => {
+      if (shortcut_title && shortcut_link) {
+        const newShortcut = ShortcutClass.factory({
+          id: uuidV4(),
+          category_id,
+          title: shortcut_title,
+          link: shortcut_link
+        });
+
+        addShortcut(newShortcut);
+      }
+    }
+  });
+
+const openUpdateShortcutModal = ({
+  shortcut,
+  openModal,
+  removeShortcut,
+  closeModal,
+  updateShortcut
+}) =>
+  openModal({
+    title: "Update shortcut",
+    fields: [
+      {
+        name: "shortcut_title",
+        label: "Shortcut title",
+        placeholder: "Shortcut title",
+        defaultValue: shortcut.title
+      },
+      {
+        name: "shortcut_link",
+        label: "Shortcut link",
+        placeholder: "Shortcut link",
+        defaultValue: shortcut.link
+      }
+    ],
+    buttons: [
+      {
+        text: "Remove",
+        config: { type: "notice" },
+        type: "button",
+        onClick: () => {
+          removeShortcut({ id: shortcut.id });
+
+          closeModal();
+        }
+      },
+      {
+        text: "Update",
+        type: "submit"
+      },
+      {
+        text: "Cancel",
+        config: { type: "danger" },
+        type: "button",
+        onClick: closeModal
+      }
+    ],
+    onSubmit: ({ shortcut_title: title, shortcut_link: link }) => {
+      if (!title || !link) return;
+
+      updateShortcut({ id: shortcut.id }, { title, link });
+    }
+  });
+
+const CategoryTitleButton = withModal(function CategoryTitleButton({
+  openModal,
+  category,
+  removeCategory,
+  closeModal,
+  updateCategory
+}) {
+  const openUpdateCategoryModal = () =>
+    openModal({
+      title: "Update category",
+      fields: [
+        {
+          label: "Category title",
+          name: "category_title",
+          defaultValue: category.title
+        }
+      ],
+      buttons: [
+        {
+          text: "Remove",
+          type: "button",
+          config: { type: "notice" },
+          onClick: () => {
+            removeCategory({ id: category.id });
+            closeModal();
+          }
+        },
+        {
+          text: "Update",
+          type: "submit"
+        },
+        {
+          text: "Cancel",
+          type: "button",
+          config: { type: "danger" },
+          onClick: closeModal
+        }
+      ],
+      onSubmit: ({ category_title }) => {
+        if (!category_title) return;
+
+        updateCategory({ id: category.id }, { title: category_title });
+      }
+    });
+
+  return (
+    <Button
+      config={{ bordered: false, backgrounded: false, size: "fit" }}
+      onClick={openUpdateCategoryModal}
+      className={styles["shortcuts-category-title"]}
+      text={category.title}
+    />
+  );
+});
 
 const ShortcutCategory = withModal(function ShortcutCategory({
   category,
@@ -45,49 +236,11 @@ const ShortcutCategory = withModal(function ShortcutCategory({
 
   return (
     <>
-      <button
-        onClick={() => {
-          openModal({
-            title: "Update category",
-            fields: [
-              {
-                label: "Category title",
-                name: "category_title",
-                defaultValue: category.title
-              }
-            ],
-            buttons: [
-              {
-                text: "Remove",
-                type: "button",
-                config: { type: "notice" },
-                onClick: () => {
-                  removeCategory({ id: category.id });
-                  closeModal();
-                }
-              },
-              {
-                text: "Update",
-                type: "submit"
-              },
-              {
-                text: "Cancel",
-                type: "button",
-                config: { type: "danger" },
-                onClick: closeModal
-              }
-            ],
-            onSubmit: ({ category_title }) => {
-              if (!category_title) return;
-
-              updateCategory({ id: category.id }, { title: category_title });
-            }
-          });
-        }}
-        className={styles["shortcuts-category-title"]}
-      >
-        {category.title}
-      </button>
+      <CategoryTitleButton
+        updateCategory={updateCategory}
+        removeCategory={removeCategory}
+        category={category}
+      />
       <div className="shortcuts">
         {shortcuts.map(({ id, title, link }) => (
           <Shortcut
@@ -96,49 +249,12 @@ const ShortcutCategory = withModal(function ShortcutCategory({
             link={link}
             onConfigClick={e => {
               e.preventDefault();
-              openModal({
-                title: "Update shortcut",
-                fields: [
-                  {
-                    name: "shortcut_title",
-                    label: "Shortcut title",
-                    placeholder: "Shortcut title",
-                    defaultValue: title
-                  },
-                  {
-                    name: "shortcut_link",
-                    label: "Shortcut label",
-                    placeholder: "Shortcut label",
-                    defaultValue: link
-                  }
-                ],
-                buttons: [
-                  {
-                    text: "Remove",
-                    config: { type: "notice" },
-                    type: "button",
-                    onClick: () => {
-                      removeShortcut({ id });
-
-                      closeModal();
-                    }
-                  },
-                  {
-                    text: "Update",
-                    type: "submit"
-                  },
-                  {
-                    text: "Cancel",
-                    config: { type: "danger" },
-                    type: "button",
-                    onClick: closeModal
-                  }
-                ],
-                onSubmit: ({ shortcut_title: title, shortcut_link: link }) => {
-                  if (!title || !link) return;
-
-                  updateShortcut({ id }, { title, link });
-                }
+              openUpdateShortcutModal({
+                shortcut: { id, title, link },
+                closeModal,
+                openModal,
+                removeShortcut,
+                updateShortcut
               });
             }}
           />
@@ -150,45 +266,11 @@ const ShortcutCategory = withModal(function ShortcutCategory({
           onClick={e => {
             e.preventDefault();
 
-            openModal({
-              title: "New shortcut",
-              fields: [
-                {
-                  type: "text",
-                  name: "shortcut_title",
-                  placeholder: "Shortcut title...",
-                  label: "Shortcut title"
-                },
-                {
-                  type: "text",
-                  name: "shortcut_link",
-                  placeholder: "Shortcut link...",
-                  label: "Shortcut link"
-                }
-              ],
-              buttons: [
-                { type: "submit", text: "Add" },
-                {
-                  type: "button",
-                  config: {
-                    type: "danger"
-                  },
-                  text: "Cancel",
-                  onClick: closeModal
-                }
-              ],
-              onSubmit: ({ shortcut_title, shortcut_link }) => {
-                if (shortcut_title && shortcut_link) {
-                  const newShortcut = ShortcutClass.factory({
-                    id: uuidV4(),
-                    category_id: category.id,
-                    title: shortcut_title,
-                    link: shortcut_link
-                  });
-
-                  addShortcut(newShortcut);
-                }
-              }
+            openAddShortcutModal({
+              addShortcut,
+              category_id: category.id,
+              openModal,
+              closeModal
             });
           }}
         />
@@ -197,55 +279,22 @@ const ShortcutCategory = withModal(function ShortcutCategory({
   );
 });
 
-const AddCategoryButton = withModal(function AddCategoryButton({
-  openModal,
-  closeModal,
-  addCategory
-}) {
+const AddCategoryButton = withModal(function AddCategoryButton(
+  modalContextProps
+) {
+  const text = "Add category...";
   const classes = [
     styles["shortcuts-category-title"],
     styles["shortcuts-category-title--grayed"]
   ].join(" ");
 
   return (
-    <button
+    <Button
+      config={{ backgrounded: false, bordered: false, size: "fit" }}
       className={classes}
-      onClick={() => {
-        openModal({
-          title: "Add category",
-          fields: [
-            {
-              name: "category_name",
-              placeholder: "Category name...",
-              type: "text",
-              label: "Category name"
-            }
-          ],
-          buttons: [
-            { type: "submit", text: "Add" },
-            {
-              type: "button",
-              config: {
-                type: "danger"
-              },
-              text: "Cancel",
-              onClick: closeModal
-            }
-          ],
-          onSubmit: results => {
-            const { category_name } = results;
-
-            if (!category_name) return;
-
-            const newCategory = CategoryClass.factory(uuidV4(), category_name);
-
-            addCategory(newCategory);
-          }
-        });
-      }}
-    >
-      Add category...
-    </button>
+      onClick={() => openAddCategoryModal(modalContextProps)}
+      text={text}
+    />
   );
 });
 

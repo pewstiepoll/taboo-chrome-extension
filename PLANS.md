@@ -20,7 +20,7 @@
 - [x] Create a new todo
 - [x] Mark todos as completed
 - [x] Remove todo
-- [ ] Clear _all completed_ todos
+- [x] Clear _all completed_ todos
 
 **Weather**
 

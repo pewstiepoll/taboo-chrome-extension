@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import uuidV4 from "uuid/v4";
 import { Todo as TodoClass } from "classes";
 import useTodos from "./useTodos";
-import { withModal } from "components/complex/modal";
+import { withModal } from "components/modules/modal";
 import { Box, Cluster } from "components/primitives";
 import { Button } from "components/composites";
 import { RemoveIcon } from "components/icons";
@@ -106,6 +106,15 @@ export const AddTodoButton = withModal(({ openModal, closeModal, addTodo }) => (
   />
 ));
 
+export const RemoveCompletedButton = ({ removeCompleted }) => (
+  <Button
+    config={{ backgrounded: false, bordered: false, size: "fit" }}
+    className={styles["todos-module--title"]}
+    text={"Remove Completed"}
+    onClick={removeCompleted}
+  />
+);
+
 export const TodoList = withModal(function TodoList({ todos, actions }) {
   return (
     <Stack reversed className={styles["todos"]}>
@@ -119,12 +128,15 @@ export const TodoList = withModal(function TodoList({ todos, actions }) {
 export function Todos() {
   const { actions, todos } = useTodos();
 
-  const { addTodo } = actions;
+  const { addTodo, removeCompleted } = actions;
 
   return (
     <Box className={styles["todos-module"]}>
       <AddTodoButton addTodo={addTodo} />
       <TodoList todos={todos} actions={actions} />
+      {Boolean(todos.length) && (
+        <RemoveCompletedButton removeCompleted={removeCompleted} />
+      )}
     </Box>
   );
 }

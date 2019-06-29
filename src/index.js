@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Shortcuts from "components/complex/shortcuts";
-import Todos from "components/complex/todos";
-import BaseModal from "components/complex/modal/base-modal";
+import Shortcuts from "components/modules/shortcuts";
+import Todos from "components/modules/todos";
+import BaseModal from "components/modules/modal/base-modal";
 
-import { useModal, ModalContext } from "components/complex/modal";
+import { useModal, ModalContext } from "components/modules/modal";
 
 import "./styles.css";
 

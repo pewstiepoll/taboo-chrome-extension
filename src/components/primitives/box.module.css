@@ -1,0 +1,34 @@
+.box {
+  display: grid;
+}
+
+.box-horizontal-align--center {
+  justify-self: center;
+}
+
+.box-horizontal-align--left {
+  justify-self: start;
+}
+
+.box-horizontal-align--right {
+  justify-self: end;
+}
+.box-horizontal-align--stretch {
+  justify-self: stretch;
+}
+
+.box-vertical-align--stretch {
+  align-self: stretch;
+}
+
+.box-vertical-align--center {
+  align-self: center;
+}
+
+.box-vertical-align--top {
+  align-self: start;
+}
+
+.box-vertical-align--bottom {
+  align-self: end;
+}

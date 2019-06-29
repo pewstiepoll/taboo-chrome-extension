@@ -24,11 +24,6 @@
   text-decoration: underline;
 }
 
-.todos {
-  display: flex;
-  flex-direction: column-reverse;
-}
-
 .todo {
   margin-bottom: 5px;
 }

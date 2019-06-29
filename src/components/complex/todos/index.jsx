@@ -6,24 +6,37 @@ import { Button } from "components/composites";
 import { RemoveIcon } from "components/icons";
 
 import styles from "./todos.module.css";
+import { Box, Cluster } from "components/primitives";
+
+export const TodoInput = ({ id, checked, ...props }) => (
+  <input
+    className={styles["todo--input"]}
+    id={id}
+    name={id}
+    type="checkbox"
+    defaultChecked={checked}
+    {...props}
+  />
+);
+
+export const TodoLabel = ({ id, title }) => (
+  <label className={styles["todo--input-label"]} htmlFor={id}>
+    {title}
+    <RemoveIcon
+      onClick={e => {
+        e.preventDefault();
+      }}
+      className={styles["todo--remove-todo"]}
+    />
+  </label>
+);
 
 export function Todo({ todo: { id, title, checked }, ...props }) {
-  const inputName = `todo-${id}`;
   return (
-    <div className={styles["todo"]}>
-      <input
-        className={styles["todo--input"]}
-        id={inputName}
-        name={inputName}
-        type="checkbox"
-        defaultChecked={checked}
-        {...props}
-      />
-      <label className={styles["todo--input-label"]} htmlFor={inputName}>
-        {title}
-        <RemoveIcon className={styles["todo--remove-todo"]} />
-      </label>
-    </div>
+    <Cluster align="stretch" className={styles["todo"]}>
+      <TodoInput id={id} checked={checked} {...props} />
+      <TodoLabel id={id} title={title} />
+    </Cluster>
   );
 }
 
@@ -46,17 +59,17 @@ export default function Todos() {
   ];
 
   return (
-    <div className={styles["todos-module"]}>
+    <Box className={styles["todos-module"]}>
       <Button
         config={{ backgrounded: false, bordered: false, size: "fit" }}
         className={styles["todos-module--title"]}
         text={"Add Todo..."}
       />
-      <div className={styles["todos"]}>
+      <Box className={styles["todos"]}>
         {mocks.map(todo => (
           <Todo key={todo.id} todo={todo} />
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }

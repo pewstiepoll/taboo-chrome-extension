@@ -13,7 +13,7 @@ export function getAlignmentClasses(alignHorizontal, alignVertical) {
 }
 
 export function Box({
-  alignment = { horizontal: "left", vertical: "left" },
+  alignment = { horizontal: "left", vertical: "top" },
   vertical,
   className: classNameProp,
   ...props
@@ -29,7 +29,7 @@ export function Box({
 Box.defaultProps = {
   alignment: {
     horizontal: "left",
-    vertical: "left"
+    vertical: "top"
   }
 };
 

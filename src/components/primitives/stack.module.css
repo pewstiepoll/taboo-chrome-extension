@@ -1,0 +1,12 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack--default {
+  flex-direction: column;
+}
+
+.stack--reversed {
+  flex-direction: column-reverse;
+}

@@ -19,3 +19,18 @@ export function Cluster({ align, className: classNameProp, ...props }) {
   );
   return <div className={clusterClasses} {...props} />;
 }
+
+Cluster.propTypes = {
+  align: "left"
+};
+
+Cluster.propTypes = {
+  align: PropTypes.oneOf([
+    "left",
+    "right",
+    "center",
+    "stretch",
+    "space-between",
+    "space-around"
+  ])
+};

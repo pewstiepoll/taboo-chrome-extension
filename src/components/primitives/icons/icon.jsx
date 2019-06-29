@@ -11,10 +11,6 @@ export default function Icon(props) {
   );
 }
 
-Icon.defaultProps = {
-  children: () => {}
-};
-
 Icon.propTypes = {
-  children: PropTypes.func.isRequired
+  children: PropTypes.node.isRequired
 };

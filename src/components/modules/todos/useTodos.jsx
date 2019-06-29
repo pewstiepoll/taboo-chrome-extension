@@ -1,5 +1,14 @@
-import { useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import { bindActionCreator } from "components/utils";
+
+import { Storage, LocalStorageStorageStrategy, Todo } from "classes";
+
+/**
+ * Initialize storage
+ */
+const storage = new Storage("todos", new LocalStorageStorageStrategy());
+
+if (!storage.hasProperty("todos")) storage.addProperty("todos", []);
 
 /**
  * Action types
@@ -81,11 +90,17 @@ export function todosReducer({ todos }, { type, payload }) {
 }
 
 export const todosInitialState = {
-  todos: []
+  todos: storage.getProperty("todos").map(todoConstructorParams => {
+    return Todo.factory(todoConstructorParams);
+  })
 };
 
 export default function useTodos() {
   const [{ todos }, dispatch] = useReducer(todosReducer, todosInitialState);
+
+  useEffect(() => {
+    storage.updateProperty("todos", todos);
+  }, [todos]);
 
   const actions = {
     addTodo: bindActionCreator(dispatch, addTodo),

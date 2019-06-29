@@ -42,8 +42,26 @@ export const toggleTodo = ({ id, title }) => ({
   }
 });
 
-export function todosReducer({ todos }, action) {
-  switch (action.type) {
+export function todosReducer({ todos }, { type, payload }) {
+  switch (type) {
+    case TODOS_ADD_TODO:
+      return { todos: [...todos, payload.todo] };
+    case TODOS_TOGGLE_TODO:
+      return {
+        todos: todos.map(todo => {
+          if (todo.id === payload.id) {
+            todo.toggle();
+          }
+
+          return todo;
+        })
+      };
+    case TODOS_REMOVE_TODO:
+      return {
+        todos: todos.filter(
+          todo => todo.id !== payload.id && todo.title !== payload.title
+        )
+      };
     default:
       break;
   }
@@ -54,7 +72,7 @@ export const todosInitialState = {
 };
 
 export default function useTodos() {
-  const [todos, dispatch] = useReducer(todosReducer, todosInitialState);
+  const [{ todos }, dispatch] = useReducer(todosReducer, todosInitialState);
 
   const actions = {
     addTodo: bindActionCreator(dispatch, addTodo),

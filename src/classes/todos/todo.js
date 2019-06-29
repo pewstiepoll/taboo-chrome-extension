@@ -18,4 +18,8 @@ export class Todo {
       if (this.hasOwnProperty(updateKey)) this[updateKey] = updates[updateKey];
     });
   }
+
+  toggle() {
+    this.checked = !this.checked;
+  }
 }

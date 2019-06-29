@@ -17,10 +17,9 @@
 
 **TODO**
 
-- [ ] Create a new todo
-- [ ] Mark todos as completed
-- [ ] Remove todos
-- [ ] Update todos
+- [x] Create a new todo
+- [x] Mark todos as completed
+- [x] Remove todo
 - [ ] Clear _all completed_ todos
 
 **Weather**

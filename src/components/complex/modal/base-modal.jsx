@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withModal, Modal } from "./index";
-import { Button, Stack, Box, Cluster } from "../primitives";
-import { formDataToObject } from "../../utils";
+import { Button } from "components/composites";
+import { Stack, Box, Cluster } from "components/primitives";
+import { formDataToObject } from "components/utils";
 
 import styles from "./base-modal.module.css";
 

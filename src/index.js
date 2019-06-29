@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Shortcuts from "./components/shortcuts";
-import BaseModal from "./components/modal/base-modal";
+import Shortcuts from "components/complex/shortcuts";
+import Todos from "components/complex/todos";
+import BaseModal from "components/complex/modal/base-modal";
 
-import { useModal, ModalContext } from "./components/modal";
+import { useModal, ModalContext } from "components/complex/modal";
 
 import "./styles.css";
 
@@ -12,6 +13,7 @@ function App() {
     <ModalContext.Provider value={useModal()}>
       <div className="App">
         <Shortcuts />
+        <Todos />
         <BaseModal />
       </div>
     </ModalContext.Provider>

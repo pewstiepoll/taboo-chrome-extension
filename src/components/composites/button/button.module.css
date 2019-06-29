@@ -1,4 +1,4 @@
-@import "./colors.module.css";
+@import "../../primitives/colors.module.css";
 
 .button {
   padding: 10px 15px;

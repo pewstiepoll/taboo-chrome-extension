@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { bindActionCreator } from "../../utils";
+import { bindActionCreator } from "components/utils";
 
 /**
  * Action types

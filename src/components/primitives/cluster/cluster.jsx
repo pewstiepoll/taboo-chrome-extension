@@ -2,7 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import styles from "./cluster.module.css";
-import { mergeClassNames } from "../../utils";
+import { mergeClassNames } from "components/utils";
+
 /**
  * Cluster is a block component for displaying and aligning inline children
  */

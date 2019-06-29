@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import styles from "./box.module.css";
-import { mergeClassNames } from "../../utils";
+import { mergeClassNames } from "components/utils";
 
 export function getAlignmentClasses(alignHorizontal, alignVertical) {
   return [

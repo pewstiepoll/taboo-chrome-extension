@@ -5,8 +5,8 @@ import {
   LocalStorageStorageStrategy,
   ShortcutCategory,
   Shortcut
-} from "../../classes";
-import { bindActionCreator } from "../../utils";
+} from "classes";
+import { bindActionCreator } from "components/utils";
 
 /**
  * Initialize storage

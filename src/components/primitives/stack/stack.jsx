@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { mergeClassNames } from "../../utils";
+import { mergeClassNames } from "components/utils";
 
 import styles from "./stack.module.css";
 

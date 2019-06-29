@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import styles from "./buttons.module.css";
+import styles from "./button.module.css";
 
 export const buttonDefaultConfigProps = {
   type: "primary",
@@ -55,3 +55,5 @@ Button.propTypes = {
   text: PropTypes.string,
   children: PropTypes.string
 };
+
+export default Button;

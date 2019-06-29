@@ -1,0 +1,101 @@
+.todos-module {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 400px;
+
+  max-height: 50vh;
+
+  --font-color: #000;
+  --font-color--grayed: rgb(0, 0, 0, 0.5);
+}
+
+.todos-module--title {
+  font-size: 1em;
+  font-weight: 300;
+
+  margin: 0 auto 5px;
+  display: block;
+
+  color: var(--font-color--grayed);
+}
+
+.todos-module--title:hover {
+  text-decoration: underline;
+}
+
+.todos {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.todo {
+  margin-bottom: 5px;
+}
+
+.todo--input {
+  display: none;
+}
+
+.todo--input-label {
+  display: block;
+  font-weight: 300;
+
+  user-select: none;
+
+  padding: 0 20px;
+
+  position: relative;
+
+  cursor: pointer;
+}
+
+.todo--input-label::before {
+  content: "";
+
+  width: 10px;
+  height: 10px;
+
+  border: 1px solid var(--font-color);
+
+  position: absolute;
+  top: 4px;
+  left: 0px;
+
+  font-size: 1.1em;
+  font-weight: 500;
+  line-height: 0.4em;
+}
+
+.todo--input:checked + .todo--input-label {
+  color: var(--font-color--grayed);
+  text-decoration: line-through;
+}
+
+.todo--input:checked + .todo--input-label::before {
+  content: "\2713";
+  color: var(--font-color--grayed);
+  border-color: var(--font-color--grayed);
+}
+
+.todo--remove-todo {
+  display: none;
+  stroke: var(--font-color--grayed);
+  stroke-width: 10px;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+
+  width: 15px;
+  height: 15px;
+  top: 2px;
+  right: 5px;
+}
+
+.todo--input-label:hover .todo--remove-todo {
+  display: block;
+}
+
+.todo--remove-todo:hover {
+  stroke: var(--font-color);
+}

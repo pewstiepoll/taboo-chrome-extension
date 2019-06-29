@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { ConfigIcon } from "../primitives";
+import { ConfigIcon } from "components/icons";
 
 import styles from "./shortcut.module.css";
 

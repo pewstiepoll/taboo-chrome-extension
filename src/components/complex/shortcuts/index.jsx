@@ -23,11 +23,11 @@ import uuidV4 from "uuid/v4";
 import {
   Shortcut as ShortcutClass,
   ShortcutCategory as CategoryClass
-} from "../../classes";
+} from "classes";
 import { withModal } from "../modal";
 
 import styles from "./shortcuts-list.module.css";
-import { Button } from "../primitives";
+import { Button } from "components/composites";
 
 /**
  * Modal open functions

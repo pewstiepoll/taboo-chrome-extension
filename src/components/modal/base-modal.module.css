@@ -1,5 +1,4 @@
 .modal-overlay {
-  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -9,48 +8,24 @@
   height: 100vh;
 
   background: rgba(0, 0, 0, 0.25);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .modal-container {
-  width: 400px;
+  min-width: 400px;
   min-height: 200px;
   background: #fefefe;
 
   padding: 10px 20px;
 }
 
-.modal-title {
+.modal-header {
   font-size: 1.3em;
   font-weight: lighter;
 }
 
-.modal-form {
-  display: flex;
-
-  flex-direction: column;
-  align-items: flex-end;
-}
-
 .modal-footer {
-  display: inline-flex;
-  justify-content: space-between;
-
   margin: 15px 0;
-}
-
-.modal-footer > *:not(:last-child) {
-  margin-right: 10px;
-}
-
-.field {
-  display: flex;
-  flex-direction: column-reverse;
-
-  width: 100%;
+  grid-column-gap: 10px;
 }
 
 .field-label {
